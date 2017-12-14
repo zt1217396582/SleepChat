@@ -63,6 +63,7 @@ public class ServiceThread extends Thread{
 					if(isRegisterSuccess)
 					{
 						messageReturn.setMessageType(MessageType.RegisterSuccess);
+						handleClientMessage.judgeUserOnOffLine(message);
 						objectOutputStream.writeObject(messageReturn);
 					}else{
 						messageReturn.setMessageType(MessageType.RegisterFail);
@@ -110,7 +111,7 @@ public class ServiceThread extends Thread{
 						serviceConClientThread.start();
 						
 						//通知其他在线用户
-						serviceConClientThread.otherNotify(message.getUser().getUserId());
+						serviceConClientThread.onlineOtherNotify(message.getUser().getUserId());
 						
 					}else{
 						messageReturn.setMessageType(MessageType.LoginFail);
@@ -153,6 +154,8 @@ public class ServiceThread extends Thread{
 				else if(message.getMessageType().equals(MessageType.UserOnline)){
 					messageReturn=handleClientMessage.getLastOnlineTime(message);
 					objectOutputStream.writeObject(messageReturn);
+					
+					handleClientMessage.judgeUserOnOffLine(message);
 					//关闭连接
 					socket.close();
 				}

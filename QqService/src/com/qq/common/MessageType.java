@@ -31,6 +31,7 @@ public interface MessageType
 	String UserOnline="6.0";//用户上线消息包
 	String UserOffLine="6.1";//用户下线消息包
 	String OffLineSuccess="6.2";//用户成功下线
+	String NotifyOfflineUser="6.3";//通知其他用户有人下线
 	
 	String GetLastLoginTime="7.0";//获取最后登录时间
 	

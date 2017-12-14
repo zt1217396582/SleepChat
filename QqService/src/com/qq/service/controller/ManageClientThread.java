@@ -15,6 +15,12 @@ public class ManageClientThread {
 	{
 		return (ServiceConClientThread)hashMap.get(userId);
 	}
+	//移除线程
+	public static void removeClientThread(String userId)
+	{
+		hashMap.remove(userId);
+	}
+	
 	//返回当前在线用户的信息
 	public static String getAllOnlineUserID(){
 		//使用迭代器完成

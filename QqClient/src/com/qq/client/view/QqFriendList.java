@@ -63,6 +63,15 @@ public class QqFriendList extends JFrame implements ActionListener, MouseListene
 			jLabels[Integer.parseInt(onLineFriend[i])-1].setEnabled(true);
 		}
 	}
+	
+	//好友离线判断
+	public void offlineFriend(Message message){
+		String offLineUserID=message.getMessage();
+		System.out.println(offLineUserID);
+		jLabels[Integer.parseInt(offLineUserID)-1].setEnabled(false);
+		
+	}
+
 	public int userCount(Message message){
 		//建立连接，发送请求好友数量信息
 		Socket socket;

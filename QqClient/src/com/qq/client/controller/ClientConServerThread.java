@@ -30,6 +30,7 @@ public class ClientConServerThread extends Thread {
 	
 	public void run(){
 		boolean isStop = false;
+		QqFriendList qqFriendList = null;
 		while(!isStop){
 			//不停读取从服务端发来的消息
 			try {
@@ -49,15 +50,26 @@ public class ClientConServerThread extends Thread {
 					//String friends[]=con.split(" ");
 					String getter=message.getGetter();
 					//修改相应的好友列表
-					QqFriendList qqFriendList=ManageQqFriendList.getQqFriendList(getter);
+					qqFriendList=ManageQqFriendList.getQqFriendList(getter);
 				
 					//更新在线好友
 					if(qqFriendList!=null){
 					qqFriendList.updateFriend(message);
 					}
 				}
+				else if(message.getMessageType().equals(MessageType.NotifyOfflineUser))
+				{
+					String getter=message.getGetter();
+					//修改相应的好友列表
+					qqFriendList=ManageQqFriendList.getQqFriendList(getter);
+					if(qqFriendList!=null){
+						qqFriendList.offlineFriend(message);
+					}
+				}
 				else if(message.getMessageType().equals(MessageType.OffLineSuccess))
 				{
+					//将下线的用户移出好友列表管理
+					ManageQqFriendList.removeQqFriendList(message.getMessage());
 					socket.close();
 					isStop = true;
 				}

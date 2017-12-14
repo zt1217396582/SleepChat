@@ -20,5 +20,8 @@ public class ManageQqFriendList {
 		return (QqFriendList) hm.get(qqID);
 	}
 
+	public static void removeQqFriendList(String qqID){
+		hm.remove(qqID);
+	}
 
 }

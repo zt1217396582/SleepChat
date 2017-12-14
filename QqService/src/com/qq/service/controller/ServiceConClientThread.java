@@ -25,7 +25,7 @@ public class ServiceConClientThread extends Thread{
 	}
 	
 	//通知其他用户
-	public void otherNotify(String mine){
+	public void onlineOtherNotify(String mine){
 		//得到所有在线用户的线程
 		HashMap hm =ManageClientThread.hashMap;
 		Iterator it=hm.keySet().iterator();
@@ -47,6 +47,32 @@ public class ServiceConClientThread extends Thread{
 		
 		}
 	}
+	//通知其他用户当前用户离线
+	public  void offlineOtherNotify(String offlineUserID){
+		//得到所有在线用户的线程
+		HashMap hm =ManageClientThread.hashMap;
+		Iterator it=hm.keySet().iterator();
+		while(it.hasNext()){	
+			Message message=new Message();
+			message.setMessage(offlineUserID);
+			message.setMessageType(MessageType.NotifyOfflineUser);
+			//取出在线用户的ID号
+			String onLineUserID=it.next().toString();
+			if(onLineUserID != null)
+			{
+				try {
+					ObjectOutputStream oos = new ObjectOutputStream(ManageClientThread.geClientThread(onLineUserID).socket.getOutputStream());
+					message.setGetter(onLineUserID);
+					oos.writeObject(message);
+				} catch (IOException e) {
+					// TODO 自动生成的 catch 块
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	}
+
 	
 	public void run()
 	{
@@ -67,6 +93,8 @@ public class ServiceConClientThread extends Thread{
 				ServiceConClientThread serviceConClientThread = ManageClientThread.geClientThread(message.getGetter());
 				ObjectOutputStream objectOutputStream = new ObjectOutputStream(serviceConClientThread.socket.getOutputStream());
 				objectOutputStream.writeObject(message);
+				HandleClientMessage handleClientMessage = new HandleClientMessage();
+				handleClientMessage.judgeUserOnOffLine(message);
 				}
 				else if(message.getMessageType().equals(MessageType.GetOnlineFriend)){
 					//把在服务器的好友给该客户端返回
@@ -82,12 +110,20 @@ public class ServiceConClientThread extends Thread{
 				else if(message.getMessageType().equals(MessageType.UserOffLine)){
 					HandleClientMessage handleClientMessage = new HandleClientMessage();
 					handleClientMessage.deleteOffLineUser(message);
+					handleClientMessage.judgeUserOnOffLine(message);
 					
-					Message m=new Message();
-					m.setMessageType(MessageType.OffLineSuccess);
-					ObjectOutputStream oos=new ObjectOutputStream(socket.getOutputStream());
-					oos.writeObject(m);
-					oos.close();
+					String offlineuserID=handleClientMessage.returnOffLineUser(message);
+					offlineOtherNotify(offlineuserID);
+					
+					Message messageReturn = new Message();
+					messageReturn.setMessage(offlineuserID);
+					messageReturn.setMessageType(MessageType.OffLineSuccess);
+					ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+					objectOutputStream.writeObject(messageReturn);
+					
+					//将离线用户移除客户端线程管理
+					ManageClientThread.removeClientThread(offlineuserID);
+					
 					//关闭连接
 					socket.close();
 					isStop = true;

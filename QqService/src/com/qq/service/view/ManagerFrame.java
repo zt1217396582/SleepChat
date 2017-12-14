@@ -17,8 +17,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
@@ -31,6 +33,7 @@ import org.w3c.dom.events.MouseEvent;
 
 import com.mysql.fabric.xmlrpc.base.Data;
 import com.mysql.jdbc.JDBC4ClientInfoProvider;
+import com.qq.service.controller.TableManager;
 import com.qq.service.db.SqlCommandList;
 import com.qq.service.db.SqlHelper;
 import com.qq.service.model.DataTable;
@@ -38,6 +41,7 @@ import com.qq.service.model.DataTable;
 public class ManagerFrame extends JFrame implements ChangeListener, ListSelectionListener, ActionListener {
 
 	DataTable dataTable;
+	TableManager tableManager;
 	static int selectedRow;
 	SqlHelper sh = null;
 	ResultSet rs = null;
@@ -84,16 +88,17 @@ public class ManagerFrame extends JFrame implements ChangeListener, ListSelectio
 		AdminUser = new JPanel();
 		LogManagement = new JPanel();
 		
+		//创建各表
+		tableManager = new TableManager();
+		tableManager.createOnlineUserTable();
+		tableManager.createAllUserTable();
+		tableManager.createUserDataTable();
+		tableManager.createAdminUserTable();
 		
-		sh = new SqlHelper();
-		String[] paras = {};
-		rs = sh.searchSqlData(SqlCommandList.searchOnlineUser, paras);
 		
-		dataTable = DataTable.createTable(rs);
-
 		OnlineUser = new JPanel();
 		OnlineUser.setName("在线用户面板");
-		OnlineUser.add(dataTable, BorderLayout.CENTER);
+		OnlineUser.add(TableManager.onlineUser, BorderLayout.CENTER);
 		//OnlineUser.add(jb1, BorderLayout.SOUTH);
 		
 		jTabbedPane.add("在线用户", OnlineUser);
@@ -101,9 +106,18 @@ public class ManagerFrame extends JFrame implements ChangeListener, ListSelectio
 		jTabbedPane.add("全部用户", AllUser);
 		jTabbedPane.add("用户资料", UserData);
 		jTabbedPane.add("管理员帐户", AdminUser);
-		jTabbedPane.add("日志文件管理", LogManagement);
+		jTabbedPane.add("日志管理", LogManagement);
 		jTabbedPane.addChangeListener(this);
 
+		
+		JScrollPane scroll = new JScrollPane(tableManager.createLogManagementTextArea());
+		scroll.setHorizontalScrollBarPolicy(  
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);  
+				scroll.setVerticalScrollBarPolicy(  
+				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		LogManagement.add(scroll);
+		
+		
 		adminPanel = new AdminPanel();
 		adminPanel.admin.setVisible(false);
 		
@@ -113,11 +127,12 @@ public class ManagerFrame extends JFrame implements ChangeListener, ListSelectio
 		
 		this.setSize(650, 550);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(true);
+		this.setResizable(false);
 		this.setVisible(true);
 
 	}
 	
+	//管理员登录面板
 	protected class AdminPanel extends JFrame
 	{
 		 JPanel admin=new JPanel();
@@ -149,7 +164,6 @@ public class ManagerFrame extends JFrame implements ChangeListener, ListSelectio
 	@Override
 	public void stateChanged(ChangeEvent arg0) {
 		// TODO 自动生成的方法存根
-		
 		//获取标签编号,按不同的标签创建不同的表
 		
 		//在线用户标签
@@ -157,63 +171,30 @@ public class ManagerFrame extends JFrame implements ChangeListener, ListSelectio
 			//清空旧表
 			OnlineUser.removeAll();
 			adminPanel.admin.setVisible(false);
-			 
-			String[] paras = {};
-			// 创建SqlHelper对象
-			sh = new SqlHelper();
-			rs = sh.searchSqlData(SqlCommandList.searchOnlineUser, paras);
-			dataTable = DataTable.createTable(rs);
-			
-			OnlineUser.add(dataTable, BorderLayout.CENTER);
+			tableManager.createOnlineUserTable();
+			OnlineUser.add(TableManager.onlineUser, BorderLayout.CENTER);
          }
 		//总用户标签
 		 else if(((JTabbedPane)arg0.getSource()).getSelectedIndex() == 1) {
 			 AllUser.removeAll();
 			 adminPanel.admin.setVisible(false);
-			 String[] paras = {};
-	
-			 // 创建SqlHelper对象
-			 sh = new SqlHelper();
-			 rs = sh.searchSqlData(SqlCommandList.searchAllUser, paras);
-			 dataTable = DataTable.createTable(rs);
-			 AllUser.add(dataTable, BorderLayout.CENTER);
+			 tableManager.createAllUserTable();
+			 AllUser.add(TableManager.allUser, BorderLayout.CENTER);
          }
 		//用户资料标签
 		 else if(((JTabbedPane)arg0.getSource()).getSelectedIndex() == 2) {
 			 UserData.removeAll();
 			 adminPanel.admin.setVisible(false);
-			 String[] paras = {};
-			 
-			 // 创建SqlHelper对象
-			 sh = new SqlHelper();
-			 rs = sh.searchSqlData(SqlCommandList.searchUserData, paras);
-			 dataTable = DataTable.createTable(rs);
-			 dataTable.jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-			 //调整列宽
-			 dataTable.jTable.getColumnModel().getColumn(0).setPreferredWidth(40);
-			 dataTable.jTable.getColumnModel().getColumn(1).setPreferredWidth(80);
-			 dataTable.jTable.getColumnModel().getColumn(2).setPreferredWidth(40);
-			 dataTable.jTable.getColumnModel().getColumn(3).setPreferredWidth(40);
-			 dataTable.jTable.getColumnModel().getColumn(4).setPreferredWidth(100);
-			 dataTable.jTable.getColumnModel().getColumn(5).setPreferredWidth(140);
-			 dataTable.jTable.getColumnModel().getColumn(6).setPreferredWidth(80);
-			 dataTable.jTable.getColumnModel().getColumn(7).setPreferredWidth(40);
-			 dataTable.jTable.getColumnModel().getColumn(8).setPreferredWidth(200);
-
-			 UserData.add(dataTable, BorderLayout.CENTER);
+			 tableManager.createUserDataTable();
+			 UserData.add(TableManager.UserData, BorderLayout.CENTER);
          }
 		//管理员帐户标签
 		 else if(((JTabbedPane)arg0.getSource()).getSelectedIndex() == 3) {
 			 AdminUser.removeAll();
-			 String[] paras = {};
 			 
-			 // 创建SqlHelper对象
-			 sh = new SqlHelper();
-			 rs = sh.searchSqlData(SqlCommandList.searchAdministrator, paras);
-			 dataTable = DataTable.createTable(rs);
-			 
-			//创建被选中行的事件监听器
-			 ListSelectionModel selectModel = dataTable.jTable.getSelectionModel();
+			 tableManager.createAdminUserTable();
+			 //创建被选中行的事件监听器
+			 ListSelectionModel selectModel = TableManager.adminUser.jTable.getSelectionModel();
 			 selectModel.addListSelectionListener(this);
 			 
 			 // 监听按钮
@@ -221,13 +202,12 @@ public class ManagerFrame extends JFrame implements ChangeListener, ListSelectio
 			 adminPanel.AddjButton.addActionListener(this);
 			 adminPanel.DeletejButton.addActionListener(this);
 			 
-			 
-			 AdminUser.add(dataTable, BorderLayout.CENTER);
+			 AdminUser.add(TableManager.adminUser, BorderLayout.CENTER);
 		     adminPanel.admin.setVisible(true);
          }
 		//日志管理标签
 		 else if(((JTabbedPane)arg0.getSource()).getSelectedIndex() == 4){
-			 
+			 adminPanel.admin.setVisible(false); 
 		 }
 	}
 
@@ -235,33 +215,26 @@ public class ManagerFrame extends JFrame implements ChangeListener, ListSelectio
 	public void valueChanged(ListSelectionEvent e) {
 		// TODO 自动生成的方法存根
 
-/*		if(!e.getValueIsAdjusting()){
-			selectedRow = dataTable.jTable.getSelectedRow();//获得选中行
-		    System.out.println(selectedRow);
-		    Object oa=dataTable.tableModel.getValueAt(selectedRow, 0);
-		    Object ob=dataTable.tableModel.getValueAt(selectedRow, 1);
-		    adminPanel.IdTextField.setText(oa.toString());
-			adminPanel.passwdTextField.setText(ob.toString());
-		}*/
 	}
 
 
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO 自动生成的方法存根
+		sh = new SqlHelper();
 	    
 		//点击修改密码按钮
 		if(arg0.getSource()==adminPanel.ChangejButton){
-			selectedRow = dataTable.jTable.getSelectedRow();//获得选中行
+			selectedRow = TableManager.adminUser.jTable.getSelectedRow();//获得选中行
 			if(selectedRow!=-1)
 			{
-				String tableId=(dataTable.tableModel.getValueAt(selectedRow, 0)).toString();
+				String tableId=(TableManager.adminUser.tableModel.getValueAt(selectedRow, 0)).toString();
 			    
 				String id=adminPanel.IdTextField.getText().trim();
 				String passwd=adminPanel.passwdTextField.getText().trim();
 				String paras[]={passwd,id};
 				if(id.equals(tableId))
 				{
-					dataTable.tableModel.setValueAt(passwd, selectedRow, 1);
+					TableManager.adminUser.tableModel.setValueAt(passwd, selectedRow, 1);
 					sh.updateData(SqlCommandList.updateAdministrator,paras);
 				}
 	
@@ -279,20 +252,20 @@ public class ManagerFrame extends JFrame implements ChangeListener, ListSelectio
 			addAdmin=addAdmin+IdTextField+","+"'"+passwdTextField+"'"+")";
 			
 			sh.excuteData(addAdmin);
-			dataTable.tableModel.addRow(paras);
+			TableManager.adminUser.tableModel.addRow(paras);
 			
 			adminPanel.IdTextField.setText("");
 			adminPanel.passwdTextField.setText("");
 		}
 		//点击删除帐号按钮
 		if(arg0.getSource()==adminPanel.DeletejButton){
-			selectedRow = dataTable.jTable.getSelectedRow();//获得选中行
+			selectedRow = TableManager.adminUser.jTable.getSelectedRow();//获得选中行
 			if(selectedRow!=-1)
 			{
-				String tableId=(dataTable.tableModel.getValueAt(selectedRow, 0)).toString();
+				String tableId=(TableManager.adminUser.tableModel.getValueAt(selectedRow, 0)).toString();
 				String paras[]={tableId};
 				sh.deleteSqlData(SqlCommandList.deleteAdministrator,paras);
-				dataTable.tableModel.removeRow(selectedRow);
+				TableManager.adminUser.tableModel.removeRow(selectedRow);
 				
 			}
 		}
