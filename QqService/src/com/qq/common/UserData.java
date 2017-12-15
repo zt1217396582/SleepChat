@@ -7,9 +7,14 @@ package com.qq.common;
 import java.util.Date;
 
 public class UserData implements java.io.Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6010003399975167355L;
+	
 	private String sex;
 	private Date birthday;
-	private int age;
+	private int age=0;
 	private String phoneNum;
 	private String email;
 	private String blood;

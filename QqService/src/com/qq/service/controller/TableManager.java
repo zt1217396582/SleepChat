@@ -3,7 +3,6 @@ package com.qq.service.controller;
 import java.awt.Font;
 import java.sql.ResultSet;
 
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 
@@ -85,6 +84,8 @@ public class TableManager {
 		logManagement=new JTextArea(22,50);
 		logManagement.setFont(new Font("黑体", Font.BOLD, 16));
 		logManagement.setEditable(false);
+		logManagement.setLineWrap(true);// 激活自动换行功能  
+		logManagement.setWrapStyleWord(true);// 激活断行不断字功能 
 	 
 		return logManagement;
 	}

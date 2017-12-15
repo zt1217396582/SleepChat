@@ -9,9 +9,8 @@ import java.util.*;
 
 import com.qq.client.view.QqFriendList;
 
-import java.io.*;
 public class ManageQqFriendList {
-	private static HashMap hm=new HashMap<String,QqFriendList>();
+	private static HashMap<String, QqFriendList> hm=new HashMap<String,QqFriendList>();
 
 	public static void addQqFriendList(String qqID,QqFriendList qqFriendList){
 		hm.put(qqID, qqFriendList);

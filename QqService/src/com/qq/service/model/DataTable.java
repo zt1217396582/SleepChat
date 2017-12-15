@@ -6,7 +6,6 @@ package com.qq.service.model;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -17,14 +16,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JViewport;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
-import org.w3c.dom.events.MouseEvent;
-
 public class DataTable extends JPanel {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1689590288583562354L;
 	
 	private Vector<String> columnName;// 表格的列名数组
 	private Vector<Vector<Object>> tableValue;// 表格的数据数组
@@ -43,6 +42,11 @@ public class DataTable extends JPanel {
 		//创建可移动列表格对象,让表格可被选中但不能被编辑
 		jTable = new JTable(tableModel) 
 		{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 4096101796269829143L;
+
 			public boolean isCellEditable(int row, int column)
 			{
 				return false;
@@ -57,25 +61,10 @@ public class DataTable extends JPanel {
 		ListSelectionModel selectModel = jTable.getSelectionModel();
 		// 选择模式为单选
 		selectModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		//jTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		//添加行被选中的事件监听器
-		//selectModel.addListSelectionListener(new MListSelectionListener(true));
 		
 		// 创建滚动面板
 		JScrollPane scrollPane = new JScrollPane();// 创建一个滚动面板对象
 		JViewport viewport = new JViewport();
-		JPanel jPanel = new JPanel();
-		
-		//鼠标点击事件
-		/*jTable.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e){
-				selectedRow=jTable.getSelectedRow();
-				Object oa=tableModel.getValueAt(selectedRow, 0);
-				Object ob=tableModel.getValueAt(selectedRow, 1);
-				System.out.println(selectedRow);
-			}
-		});*/
-		
 		
 		// 设置视口首选大小
 		scrollPane.setRowHeaderView(viewport);
@@ -120,46 +109,6 @@ public class DataTable extends JPanel {
 		DataTable dataTable = new DataTable(columnName, tableValue);
 		return dataTable;
 	}
-	
-	/*private class TableModel extends AbstractTableModel {// 移动列表格
-		
-		public int getRowCount() {// 返回行数
-			return tableValue.size();
-		}
-
-		public int getColumnCount() {// 返回可移动列的数量
-			return columnName.size();// 返回列的数量
-		}
-
-		public Object getValueAt(int rowIndex, int columnIndex) {// 返回指定单元格的值
-			return tableValue.get(rowIndex).get(columnIndex);
-		}
-
-		public String getColumnName(int columnIndex) { // 返回指定列的名称
-			return columnName.get(columnIndex);
-		}
-	}*/
-
-	//创建被选中行的事件监听器
-	/*private class MListSelectionListener implements ListSelectionListener{
-		
-		boolean isColumnTable=false;//默认不选中列表格中的行
-		public MListSelectionListener(boolean isColumnTable) {
-			this.isColumnTable=isColumnTable;
-		}
-		@Override
-		public void valueChanged(ListSelectionEvent e) {
-			// TODO 自动生成的方法存根
-			if(!e.getValueIsAdjusting()){
-				if(isColumnTable){
-					selectedRow=jTable.getSelectedRow();//获得选中行
-					
-					System.out.println(selectedRow);
-					//jTable.setRowSelectionInterval(row, row);
-				}
-			}
-		}	
-	}*/
 	
 	public void setRowCount(int i) {
 		// TODO 自动生成的方法存根

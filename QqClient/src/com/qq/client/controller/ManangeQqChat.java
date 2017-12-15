@@ -9,7 +9,7 @@ import java.util.*;
 
 import com.qq.client.view.QqChat;
 public class ManangeQqChat {
-	private static HashMap hm=new HashMap<String,QqChat>();
+	private static HashMap<String, QqChat> hm=new HashMap<String,QqChat>();
 	//º”»Î
 	public static void addQqChat(String loginIDandFriendID,QqChat qqchat){
 		hm.put(loginIDandFriendID, qqchat);

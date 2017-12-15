@@ -1,8 +1,5 @@
 package com.qq.client.view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -16,7 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
-import com.qq.client.controller.ManageClientConServerThread;
 import com.qq.common.Message;
 import com.qq.common.MessageType;
 import com.qq.common.User;
@@ -30,6 +26,11 @@ import javax.swing.JButton;
 
 public class RegisterFrame extends JFrame implements ActionListener{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5626509258328046087L;
+	
 	private JPanel contentPane;
 	private JTextField IDTextField;
 	private JPasswordField passwdField;

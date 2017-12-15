@@ -27,8 +27,8 @@ public class ServiceConClientThread extends Thread{
 	//通知其他用户
 	public void onlineOtherNotify(String mine){
 		//得到所有在线用户的线程
-		HashMap hm =ManageClientThread.hashMap;
-		Iterator it=hm.keySet().iterator();
+		HashMap<String, ServiceConClientThread> hm =ManageClientThread.hashMap;
+		Iterator<String> it=hm.keySet().iterator();
 		while(it.hasNext()){
 			
 			Message message=new Message();
@@ -50,8 +50,8 @@ public class ServiceConClientThread extends Thread{
 	//通知其他用户当前用户离线
 	public  void offlineOtherNotify(String offlineUserID){
 		//得到所有在线用户的线程
-		HashMap hm =ManageClientThread.hashMap;
-		Iterator it=hm.keySet().iterator();
+		HashMap<String, ServiceConClientThread> hm =ManageClientThread.hashMap;
+		Iterator<String> it=hm.keySet().iterator();
 		while(it.hasNext()){	
 			Message message=new Message();
 			message.setMessage(offlineUserID);

@@ -12,9 +12,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.sql.Date;
-import java.text.Format;
-import java.text.SimpleDateFormat;
 
 import com.qq.client.controller.*;
 import com.qq.common.Message;
@@ -23,6 +20,11 @@ import com.qq.common.User;
 
 public class QqFriendList extends JFrame implements ActionListener, MouseListener{
 	//处理第一张卡片(我的好友)
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3501402828502579315L;
 	
 	JPanel jPanelFriend, jPanelFriend2, jPanelFriend3;
 	JButton jPanelFriend_Button, jPanelFriend_Button2, jPanelFriend_Button3;
@@ -52,7 +54,7 @@ public class QqFriendList extends JFrame implements ActionListener, MouseListene
 			e.printStackTrace();
 		}
 		
-		QqFriendList qqFriendList = new QqFriendList("1");
+		//QqFriendList qqFriendList = new QqFriendList("1");
 
 	}
 	

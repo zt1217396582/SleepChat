@@ -24,7 +24,7 @@ public class ManageClientThread {
 	//返回当前在线用户的信息
 	public static String getAllOnlineUserID(){
 		//使用迭代器完成
-		Iterator it=hashMap.keySet().iterator();
+		Iterator<String> it=hashMap.keySet().iterator();
 		String res="";
 		while(it.hasNext()){
 			res+=it.next().toString()+" ";

@@ -4,23 +4,16 @@
 
 package com.qq.service.controller;
 
-import java.awt.Window.Type;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-
-import javax.naming.directory.SearchControls;
-
 import java.sql.ResultSet;
 
 import com.qq.common.Message;
 import com.qq.common.MessageType;
-import com.qq.common.User;
-import com.qq.common.UserData;
 import com.qq.service.db.ServiceConDatabase;
 import com.qq.service.db.SqlCommandList;
 import com.qq.service.db.SqlHelper;

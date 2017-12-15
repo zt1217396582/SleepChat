@@ -21,9 +21,13 @@ import javax.swing.border.EmptyBorder;
 import com.qq.common.Message;
 import com.qq.common.MessageType;
 import com.qq.common.User;
-import com.qq.common.UserData;
 
 public class ChangePasswordFrame extends JFrame implements ActionListener{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8264690432156941782L;
+	
 	private JPanel contentPane;
 	private JTextField IDTextField;
 	private JPasswordField NowpasswdField;

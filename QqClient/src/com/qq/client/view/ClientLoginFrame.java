@@ -1,6 +1,5 @@
 package com.qq.client.view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -31,6 +30,11 @@ import java.awt.event.ActionEvent;
 
 public class ClientLoginFrame extends JFrame implements ActionListener{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1678680622665649129L;
+	
 	private JPanel contentPane;
 	private JTextField UserIdTextField;
 	private JPasswordField passwordTextField;

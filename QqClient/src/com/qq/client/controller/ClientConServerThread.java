@@ -46,8 +46,6 @@ public class ClientConServerThread extends Thread {
 				qqChat.showMessage(message);
 				}
 				else if(message.getMessageType().equals(MessageType.ReturnOnlineFriend)){
-					String con=message.getMessage();
-					//String friends[]=con.split(" ");
 					String getter=message.getGetter();
 					//修改相应的好友列表
 					qqFriendList=ManageQqFriendList.getQqFriendList(getter);

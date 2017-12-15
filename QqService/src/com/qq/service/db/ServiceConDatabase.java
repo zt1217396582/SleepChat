@@ -6,21 +6,12 @@ package com.qq.service.db;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.Properties;
 
 public class ServiceConDatabase {
 	// 定义链接所需要的变量
 	private static Connection con = null;
-	private static PreparedStatement ps = null;
-	private static ResultSet rs = null;
 
 	// 定义链接数据库所需要的参数
 	private static String url = "";

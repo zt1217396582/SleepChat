@@ -11,7 +11,6 @@ import com.qq.client.controller.ClientConServerThread;
 import com.qq.client.controller.ManageClientConServerThread;
 import com.qq.common.Message;
 import com.qq.common.MessageType;
-import com.qq.common.User;
 
 public class QqClientConServer {
 	

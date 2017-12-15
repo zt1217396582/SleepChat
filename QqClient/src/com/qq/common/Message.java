@@ -8,6 +8,11 @@ import java.util.Date;
 
 public class Message implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1770624737888028315L;
+
 	private String messageType; //信息类型，判断信息传输的各种情况
 	
 	private String sender;//发送者

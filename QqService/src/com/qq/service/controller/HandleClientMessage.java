@@ -1,6 +1,5 @@
 package com.qq.service.controller;
 
-import java.security.MessageDigestSpi;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -8,15 +7,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.print.attribute.standard.RequestingUserName;
-
 import com.qq.common.Message;
 import com.qq.common.MessageType;
 import com.qq.common.User;
 import com.qq.common.UserData;
 import com.qq.service.db.SqlCommandList;
 import com.qq.service.db.SqlHelper;
-import com.qq.service.view.ManagerFrame;
 
 public class HandleClientMessage {
 	
@@ -281,7 +277,6 @@ public class HandleClientMessage {
 	public boolean changeUserPassword(Message message){
 		boolean Success=false;
 		User user = message.getUser();
-		String username=null;
 		String [] parameters = {};
 		String sqlUpdateUserPassword="update 全部用户 set 密码= ";
 		sqlUpdateUserPassword=sqlUpdateUserPassword+"'"+message.getMessage()+"'"+" where 帐号 = "+user.getUserId();

@@ -1,6 +1,5 @@
 package com.qq.client.view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,6 +32,11 @@ import javax.swing.JComboBox;
 
 public class UserMessage extends JFrame implements ActionListener{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6559146600773266559L;
+	
 	private JPanel contentPane;
 	private JTextField IDTextField;
 	private JTextField userNameTextField;

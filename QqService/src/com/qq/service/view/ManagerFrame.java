@@ -9,8 +9,6 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 
 import javax.swing.JButton;
@@ -19,8 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
@@ -29,10 +25,6 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import org.w3c.dom.events.MouseEvent;
-
-import com.mysql.fabric.xmlrpc.base.Data;
-import com.mysql.jdbc.JDBC4ClientInfoProvider;
 import com.qq.service.controller.TableManager;
 import com.qq.service.db.SqlCommandList;
 import com.qq.service.db.SqlHelper;
@@ -40,6 +32,11 @@ import com.qq.service.model.DataTable;
 
 public class ManagerFrame extends JFrame implements ChangeListener, ListSelectionListener, ActionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6875613187779417292L;
+	
 	DataTable dataTable;
 	TableManager tableManager;
 	static int selectedRow;
@@ -135,7 +132,12 @@ public class ManagerFrame extends JFrame implements ChangeListener, ListSelectio
 	//π‹¿Ì‘±µ«¬º√Ê∞Â
 	protected class AdminPanel extends JFrame
 	{
-		 JPanel admin=new JPanel();
+		 /**
+		 * 
+		 */
+		private static final long serialVersionUID = 3449512980886572705L;
+		
+		JPanel admin=new JPanel();
 		 JButton ChangejButton=new JButton("–ﬁ∏ƒ√‹¬Î");
 		 JButton AddjButton=new JButton("ÃÌº”’ ∫≈");
 		 JButton DeletejButton=new JButton("…æ≥˝’ ∫≈");

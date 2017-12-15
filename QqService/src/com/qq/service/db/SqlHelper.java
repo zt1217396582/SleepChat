@@ -5,28 +5,18 @@
 package com.qq.service.db;
 
 import java.sql.Connection;
-import java.sql.CallableStatement;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.omg.CORBA.portable.ValueInputStream;
-
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import com.qq.service.db.*;
 
 public class SqlHelper {
 	//声明Connection对象
 	private static Connection con = null;
 	private static PreparedStatement ps = null;
 	private static ResultSet rs = null;
-	private static CallableStatement cs = null;
 	private static Statement sm=null;
 
 	// 创建statement类对象，用于执行SQL语句

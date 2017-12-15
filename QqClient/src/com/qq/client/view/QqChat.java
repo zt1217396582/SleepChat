@@ -7,23 +7,23 @@ package com.qq.client.view;
 
 import javax.swing.*;
 
-import org.w3c.dom.events.Event;
-
 import com.qq.client.controller.ManageClientConServerThread;
-import com.qq.client.model.QqClientConServer;
 import com.qq.common.Message;
 import com.qq.common.MessageType;
 
-import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class QqChat extends JFrame implements ActionListener{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2870356635447654905L;
+	
 	JTextArea jTextArea;
 	JTextField jTextField;
 	JButton jButton;
@@ -40,7 +40,7 @@ public class QqChat extends JFrame implements ActionListener{
 			e.printStackTrace();
 		}
 		
-		QqChat qqChat = new QqChat("1", "2");
+		//QqChat qqChat = new QqChat("1", "2");
 		
 	}
 	

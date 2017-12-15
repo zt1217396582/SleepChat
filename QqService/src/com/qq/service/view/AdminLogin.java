@@ -15,12 +15,16 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 import com.qq.service.db.*;
 
 
 public class AdminLogin extends JFrame implements ActionListener{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -974909559710564105L;
+	
 	SqlHelper sh = null;
 	ResultSet rs = null;
 	
