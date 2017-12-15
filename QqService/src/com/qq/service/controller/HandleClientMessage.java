@@ -326,7 +326,7 @@ public class HandleClientMessage {
 		return message.getMessage();
 	}
 	
-	//用户上下线消息判断
+	//将需要的信息显示在日志管理面板上
 	public void judgeUserOnOffLine(Message message){
 		if(message.getMessageType().equals(MessageType.UserOnline)){
 			String meString="用户"+message.getUser().getUserId()+"上线！";
