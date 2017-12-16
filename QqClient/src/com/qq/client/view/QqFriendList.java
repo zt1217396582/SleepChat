@@ -53,7 +53,6 @@ public class QqFriendList extends JFrame implements ActionListener, MouseListene
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		//QqFriendList qqFriendList = new QqFriendList("1");
 
 	}

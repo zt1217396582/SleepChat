@@ -96,10 +96,8 @@ public class ManagerFrame extends JFrame implements ChangeListener, ListSelectio
 		OnlineUser = new JPanel();
 		OnlineUser.setName("在线用户面板");
 		OnlineUser.add(TableManager.onlineUser, BorderLayout.CENTER);
-		//OnlineUser.add(jb1, BorderLayout.SOUTH);
 		
 		jTabbedPane.add("在线用户", OnlineUser);
-		// OnlineUser.setLayout(null);
 		jTabbedPane.add("全部用户", AllUser);
 		jTabbedPane.add("用户资料", UserData);
 		jTabbedPane.add("管理员帐户", AdminUser);

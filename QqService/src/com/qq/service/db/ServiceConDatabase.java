@@ -19,14 +19,11 @@ public class ServiceConDatabase {
 	private static String driver = "";
 	private static String password = "";
 
-	// 定义读取配置文件所需要的变量
-	//private static MySqlConfigration mySqlConfigration = null;
 
 	// 加载驱动程序
 	static {
 		try {
 			// 读取配置
-			//mySqlConfigration = new MySqlConfigration();
 			url = MySqlConfigration.getUrl();
 			driver = MySqlConfigration.getDriver();
 			username = MySqlConfigration.getUserName();
@@ -84,26 +81,6 @@ public class ServiceConDatabase {
             }  
         }  
     }  
-	
-	
-	// 创建statement类对象，用于执行SQL语句
-	// Statement statement = mySqlConfigration.con.createStatement();
-	// 要执行的SQL语句
-	// String sql = "select * from emp";
-	// 3.ResultSet类，用来存放获取的结果集！！
-	// ResultSet rs = statement.executeQuery(sql);
-	/*
-	 * System.out.println("-----------------"); System.out.println("执行结果如下所示:");
-	 * System.out.println("-----------------"); System.out.println("姓名" + "\t" +
-	 * "职称"); System.out.println("-----------------");
-	 * 
-	 * String job = null; String id = null; while(rs.next()){ //获取stuname这列数据
-	 * job = rs.getString("job"); //获取stuid这列数据 id = rs.getString("ename");
-	 * 
-	 * //输出结果 System.out.println(id + "\t" + job); }
-	 * 
-	 * System.out.println("数据库数据获取成功"); rs.close();
-	 */
 	public static void main(String[] args) {
 		// TODO 自动生成的方法存根
 		 new ServiceConDatabase();

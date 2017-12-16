@@ -30,7 +30,6 @@ public class ServiceThread extends Thread{
 			//监听9999
 			System.out.println("正在监听9999端口");
 			//连接读取数据库信息
-			//ServiceConDatabase scd = new ServiceConDatabase();
 			ServiceConDatabase.getConnection();
 			serverSocket = new ServerSocket(9999);
 			//阻塞，等待连接

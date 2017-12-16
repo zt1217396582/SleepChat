@@ -19,13 +19,6 @@ public class SqlHelper {
 	private static ResultSet rs = null;
 	private static Statement sm=null;
 
-	// 创建statement类对象，用于执行SQL语句
-	// Statement statement=new
-	// ServiceConDatabase().getSqlConfigration().con.createStatement();;
-	// 要执行的SQL语句
-	// String sql=null;
-	// ResultSet类，用来存放获取的结果集
-	// ResultSet rs = null;
 	public SqlHelper() {}
 
 	//添加功能
@@ -33,7 +26,6 @@ public class SqlHelper {
 		try {
 			ResultSetMetaData rsmd = rSet.getMetaData();
 			int columnCount = rsmd.getColumnCount();
-			//ps=con.prepareStatemen("insert into 在线用户(帐号,密码,用户名) "+values(?,?,?))
 			String values="values(";
 			for(int i=1;i<=columnCount;i++){	
 				if(i==1){
@@ -46,11 +38,6 @@ public class SqlHelper {
 			values=values+")";
 			con=ServiceConDatabase.getConnection();
 			ps=con.prepareStatement(sql+values);
-			
-			//插入数据
-			/*for(int i=1;i<=columnCount;i++){
-				ps.setObject(i, data[i]);
-			}*/
 			
 			//给问号赋值  
             if (parameteres != null) {  

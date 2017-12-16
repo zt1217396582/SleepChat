@@ -120,26 +120,4 @@ public class QqChat extends JFrame implements ActionListener{
 		}
 	}
 
-/*	@Override
-	public void run() {
-		// TODO 自动生成的方法存根
-		while(true){
-			try {
-				//读取
-				ObjectInputStream objectInputStream=new ObjectInputStream(QqClientConServer.socket.getInputStream());
-				Message message=(Message) objectInputStream.readObject();
-				//显示
-				String info=message.getSender()+"对"+message.getGetter()+"说："+message.getMessage()+"\r\n";
-				this.jTextArea.append(info);
-			
-			} catch (IOException e) {
-				// TODO 自动生成的 catch 块
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				// TODO 自动生成的 catch 块
-				e.printStackTrace();
-			}
-		}
-	}*/
-
 }

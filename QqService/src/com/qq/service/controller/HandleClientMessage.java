@@ -253,8 +253,6 @@ public class HandleClientMessage {
 	    
 	    //将在线用户中的离线用户数据删除
 	    String offlineUserId = message.getMessage();
-	    //int offlineuserID=Integer.parseInt(offlineUserId)-1;
-	    //offlineUserId=Integer.toString(offlineuserID);
 	    int count = TableManager.onlineUser.tableModel.getRowCount();
 	    for(int i = 0; i < count; i++) {
 		    String rowId = (String) TableManager.onlineUser.tableModel.getValueAt(i, 0);
