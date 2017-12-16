@@ -3,15 +3,21 @@ package com.qq.service.view;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
+import com.qq.service.db.SqlCommandList;
+import com.qq.service.db.SqlHelper;
 import com.qq.service.model.MyQqService;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
@@ -25,7 +31,7 @@ public class ServiceFrame extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private JButton openButton, closeButton;
 	private JTextField adminTextField;
-	private JTextField passwdTextField;
+	private JPasswordField passwdTextField;
 
 	/**
 	 * Launch the application.
@@ -86,7 +92,7 @@ public class ServiceFrame extends JFrame implements ActionListener {
 		passwdLabel.setBounds(73, 68, 45, 39);
 		contentPane.add(passwdLabel);
 		
-		passwdTextField = new JTextField();
+		passwdTextField = new JPasswordField();
 		passwdTextField.setBounds(126, 75, 151, 24);
 		contentPane.add(passwdTextField);
 		passwdTextField.setColumns(10);
@@ -100,9 +106,37 @@ public class ServiceFrame extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO 自动生成的方法存根
 		if(e.getSource() == openButton)	{
+			
+			int isFalse=1;
+			SqlHelper sh = new SqlHelper();
+			String AdminUserID = adminTextField.getText().trim();
+			String AdminPassword = new String(passwdTextField.getPassword());
+			String paras[]={AdminUserID,AdminPassword};
+			ResultSet rs = sh.searchSqlData(SqlCommandList.searchAdministrator,paras);
+			try {
+				while(rs.next()){
+					if(AdminUserID.equals(rs.getString(1))){
+						if(AdminPassword.equals(rs.getString(2))){
+							isFalse=0;
+							JOptionPane.showMessageDialog(this, "登录成功！");
+							this.dispose();
+							break;
+						}
+					}
+				}
+			} catch (SQLException e1) {
+				// TODO 自动生成的 catch 块
+				e1.printStackTrace();
+			}
+			if(isFalse==1){
+				JOptionPane.showMessageDialog(this, "密码或账号错误，请重新输入!");
+				adminTextField.setText("");
+				passwdTextField.setText("");
+			}
+			
 			this.setVisible(false);
-			new ManagerFrame();
 			new MyQqService();
+			new ManagerFrame();
 		}
 		else if(e.getSource() == closeButton) {
 			this.dispose();

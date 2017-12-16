@@ -12,7 +12,7 @@ public class mainService {
 			e.printStackTrace();
 		}
 		
-		new AdminLogin();
+		new ServiceFrame();
 	}
 
 }

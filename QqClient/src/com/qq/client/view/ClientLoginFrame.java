@@ -176,7 +176,6 @@ public class ClientLoginFrame extends JFrame implements ActionListener{
 		{
 			System.out.println("正在验证。。");
 			QqClientUser qqClientUser = new QqClientUser();
-			//User user = new User();
 			user.setUserId(UserIdTextField.getText().trim());
 			user.setPassword(new String(passwordTextField.getPassword()));
 			System.out.println("用户发送的id：" + user.getUserId() + "密码：" + user.getPassword());

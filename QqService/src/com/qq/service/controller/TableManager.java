@@ -81,7 +81,7 @@ public class TableManager {
 	
 	public JTextArea createLogManagementTextArea()
 	{
-		logManagement=new JTextArea(22,50);
+		logManagement=new JTextArea(22,65);
 		logManagement.setFont(new Font("黑体", Font.BOLD, 16));
 		logManagement.setEditable(false);
 		logManagement.setLineWrap(true);// 激活自动换行功能  
