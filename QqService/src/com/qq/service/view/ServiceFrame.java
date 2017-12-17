@@ -118,7 +118,8 @@ public class ServiceFrame extends JFrame implements ActionListener {
 					if(AdminUserID.equals(rs.getString(1))){
 						if(AdminPassword.equals(rs.getString(2))){
 							isFalse=0;
-							JOptionPane.showMessageDialog(this, "登录成功！");
+							new MyQqService();
+							JOptionPane.showMessageDialog(this, "服务器成功启动！");
 							this.dispose();
 							break;
 						}
@@ -135,7 +136,6 @@ public class ServiceFrame extends JFrame implements ActionListener {
 			}
 			
 			this.setVisible(false);
-			new MyQqService();
 			new ManagerFrame();
 		}
 		else if(e.getSource() == closeButton) {
